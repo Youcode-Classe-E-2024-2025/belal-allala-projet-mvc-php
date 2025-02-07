@@ -19,5 +19,4 @@ class Validator {
     {
         return filter_var($value, FILTER_VALIDATE_INT) !== false;
     }
-    // Ajoutez d'autres méthodes de validation selon vos besoins
 }

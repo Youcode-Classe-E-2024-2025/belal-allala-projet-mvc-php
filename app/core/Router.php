@@ -5,13 +5,19 @@ namespace App\Core;
 class Router
 {
     private $routes = [];
+    private $namedRoutes = []; 
 
-    public function addRoute(string $method, string $path, $controller, string $action)
+    public function addRoute(string $method, string $path, $controller, string $action, string $name = null)
     {
         $this->routes[$method][$path] = [
             'controller' => $controller,
-            'action' => $action
+            'action' => $action,
+            'name' => $name
         ];
+
+        if ($name !== null) {
+            $this->namedRoutes[$name] = $path;
+        }
     }
 
     public function dispatch(string $method, string $uri)
@@ -19,45 +25,89 @@ class Router
         $uri = $this->removeTrailingSlash($uri);
 
         foreach ($this->routes[$method] as $path => $route) {
-            // Convertir le chemin de la route en expression régulière
             $pattern = preg_replace('/\{(\w+)\}/', '(?P<$1>[^/]+)', $path);
             $pattern = "#^" . $pattern . "$#";
-
-            // Vérifier si l'URI correspond à l'expression régulière
             if (preg_match($pattern, $uri, $matches)) {
                 $controllerName = $route['controller'];
                 $actionName = $route['action'];
-
-                // Récupérer les paramètres de l'URL
                 $params = array_filter($matches, function ($key) {
                     return is_string($key);
                 }, ARRAY_FILTER_USE_KEY);
-
-                // Afficher les paramètres extraits (pour débogage)
-                echo "<pre>";
-                var_dump($params);
-                echo "</pre>";
-
-                // Gérer les contrôleurs (string) et les fonctions anonymes (Closure)
                 if (is_string($controllerName)) {
                     $controller = new $controllerName();
                     call_user_func_array([$controller, $actionName], $params);
                 } else {
-                    // Exécuter la fonction anonyme
                     call_user_func_array($controllerName, $params);
                 }
-
-                return; // Arrêter la recherche après avoir trouvé une correspondance
+                return; 
             }
         }
 
-        // Gérer les routes non trouvées
-        echo "404 Not Found";
+        http_response_code(404); 
+        echo View::render('front/error404.twig');
     }
 
     private function removeTrailingSlash(string $uri): string
     {
         $uri = rtrim($uri, '/');
         return $uri === "" ? "/" : $uri;
+    }
+
+    public function generateUrl(string $name, array $params = []): string
+    {
+        if (!isset($this->namedRoutes[$name])) {
+            throw new \Exception("Route nommée '$name' non trouvée.");
+        }
+
+        $path = $this->namedRoutes[$name];
+        foreach ($params as $key => $value) {
+            $path = str_replace('{' . $key . '}', $value, $path);
+        }
+
+        return $path;
+    }
+
+    public function get(string $path, $controller, string $action, string $name = null) {
+        $this->addRoute('GET', $path, $controller, $action, $name);
+    }
+
+    public function post(string $path, $controller, string $action, string $name = null) {
+        $this->addRoute('POST', $path, $controller, $action, $name);
+    }
+
+    public function put(string $path, $controller, string $action, string $name = null) {
+        $this->addRoute('PUT', $path, $controller, $action, $name);
+    }
+
+    public function delete(string $path, $controller, string $action, string $name = null) {
+        $this->addRoute('DELETE', $path, $controller, $action, $name);
+    }
+
+    public function group(string $prefix, callable $callback) {
+        $groupRouter = new GroupRouter($prefix, $this);
+        $callback($groupRouter); 
+    }
+}
+
+class GroupRouter {
+    private $prefix;
+    private $router;
+
+    public function __construct(string $prefix, Router $router) {
+        $this->prefix = $prefix;
+        $this->router = $router;
+    }
+
+    public function addRoute(string $method, string $path, $controller, string $action, string $name = null) {
+        $prefixedPath = $this->prefix . $path;
+        $this->router->addRoute($method, $prefixedPath, $controller, $action, $name);
+    }
+
+    public function get(string $path, $controller, string $action, string $name = null) {
+        $this->addRoute('GET', $path, $controller, $action, $name);
+    }
+
+    public function post(string $path, $controller, string $action, string $name = null) {
+        $this->addRoute('POST', $path, $controller, $action, $name);
     }
 }

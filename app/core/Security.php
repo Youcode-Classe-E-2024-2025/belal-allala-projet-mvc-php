@@ -4,20 +4,21 @@ namespace App\Core;
 class Security {
 
     public static function generateCsrfToken() {
-        if (empty($_SESSION['csrf_token'])) {
-            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        try {
+            if (empty($_SESSION['csrf_token'])) {
+                $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); 
+            }
+            return $_SESSION['csrf_token'];
+        } catch (\Exception $e) {
+            error_log("Erreur lors de la génération du token CSRF : " . $e->getMessage());
+            return null; 
         }
-        return $_SESSION['csrf_token'];
     }
-
+    
     public static function validateCsrfToken($token) {
-        if (empty($_SESSION['csrf_token']) || $_SESSION['csrf_token'] !== $token) {
-            return false;
-        }
-        return true;
+        return isset($_SESSION['csrf_token']) && $_SESSION['csrf_token'] === $token;
     }
 
-    // Fonction d'échappement XSS (peut-être redondante si Twig est bien configuré)
     public static function xssClean($data) {
         return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
     }

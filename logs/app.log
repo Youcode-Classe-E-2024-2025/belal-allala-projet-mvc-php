@@ -1,0 +1,103 @@
+[2025-02-07 21:05:11] app.INFO: Utilisateur déconnecté.  
+[2025-02-07 21:05:17] app.WARNING: Échec de la connexion pour l'utilisateur : zabylefuji@mailinator.com {"ip":"127.0.0.1","url":"/login"} 
+[2025-02-07 21:05:33] app.WARNING: CSRF token invalid lors de l'inscription.  
+[2025-02-07 21:07:19] app.INFO: Nouvel utilisateur inscrit : fupuledum@mailinator.com {"username":"rydikanyh"} 
+[2025-02-07 21:07:59] app.WARNING: CSRF token invalid lors de l'inscription.  
+[2025-02-07 21:08:22] app.INFO: Nouvel utilisateur inscrit : siziseq@mailinator.com {"username":"moxologox"} 
+[2025-02-07 21:20:52] app.WARNING: CSRF token invalid lors de l'inscription.  
+[2025-02-07 21:23:23] app.WARNING: CSRF token invalid lors de l'inscription.  
+[2025-02-07 21:36:52] app.CRITICAL: Exception non gérée : Call to a member function create() on null {"exception":"[object] (Error(code: 0): Call to a member function create() on null at C:\\laragon\\www\\projet-mvc-php\\app\\controllers\\front\\AuthController.php:76)
+[stacktrace]
+#0 [internal function]: App\\Controllers\\Front\\AuthController->signup()
+#1 C:\\laragon\\www\\projet-mvc-php\\app\\core\\Router.php(45): call_user_func_array(Array, Array)
+#2 C:\\laragon\\www\\projet-mvc-php\\public\\index.php(27): App\\Core\\Router->dispatch('POST', '/signup')
+#3 {main}
+"} 
+[2025-02-07 21:38:27] app.ERROR: Erreur lors de la création de l'utilisateur : SQLSTATE[23505]: Unique violation: 7 ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « users_email_key »
+DETAIL:  La clé « (email)=(belal@belal.com) » existe déjà. {"email":"belal@belal.com","username":"belal@belal.com"} 
+[2025-02-07 21:38:27] app.ERROR: Erreur lors de l'enregistrement de l'utilisateur : belal@belal.com {"username":"belal@belal.com"} 
+[2025-02-07 21:40:29] app.ERROR: Erreur lors de la création de l'utilisateur : SQLSTATE[23505]: Unique violation: 7 ERREUR:  la valeur d'une clé dupliquée rompt la contrainte unique « users_email_key »
+DETAIL:  La clé « (email)=(belal@belal.com) » existe déjà. {"email":"belal@belal.com","username":"belal@belal.com"} 
+[2025-02-07 21:40:29] app.ERROR: Erreur lors de l'enregistrement de l'utilisateur : belal@belal.com {"username":"belal@belal.com"} 
+[2025-02-07 21:51:08] app.CRITICAL: Exception non gérée : Class "App\Core\Auth" not found {"exception":"[object] (Error(code: 0): Class \"App\\Core\\Auth\" not found at C:\\laragon\\www\\projet-mvc-php\\app\\controllers\\back\\DashboardController.php:14)
+[stacktrace]
+#0 [internal function]: App\\Controllers\\Back\\DashboardController->index()
+#1 C:\\laragon\\www\\projet-mvc-php\\app\\core\\Router.php(45): call_user_func_array(Array, Array)
+#2 C:\\laragon\\www\\projet-mvc-php\\public\\index.php(27): App\\Core\\Router->dispatch('GET', '/admin/dashboar...')
+#3 {main}
+"} 
+[2025-02-07 21:51:28] app.CRITICAL: Exception non gérée : Class "App\Core\Auth" not found {"exception":"[object] (Error(code: 0): Class \"App\\Core\\Auth\" not found at C:\\laragon\\www\\projet-mvc-php\\app\\controllers\\back\\UserController.php:15)
+[stacktrace]
+#0 [internal function]: App\\Controllers\\Back\\UserController->index()
+#1 C:\\laragon\\www\\projet-mvc-php\\app\\core\\Router.php(45): call_user_func_array(Array, Array)
+#2 C:\\laragon\\www\\projet-mvc-php\\public\\index.php(27): App\\Core\\Router->dispatch('GET', '/admin/users')
+#3 {main}
+"} 
+[2025-02-07 21:53:23] app.INFO: Utilisateur connecté : belal@belal.com {"user_id":3} 
+[2025-02-07 21:53:43] app.CRITICAL: Exception non gérée : Class "App\Core\Auth" not found {"exception":"[object] (Error(code: 0): Class \"App\\Core\\Auth\" not found at C:\\laragon\\www\\projet-mvc-php\\app\\controllers\\back\\DashboardController.php:14)
+[stacktrace]
+#0 [internal function]: App\\Controllers\\Back\\DashboardController->index()
+#1 C:\\laragon\\www\\projet-mvc-php\\app\\core\\Router.php(45): call_user_func_array(Array, Array)
+#2 C:\\laragon\\www\\projet-mvc-php\\public\\index.php(27): App\\Core\\Router->dispatch('GET', '/admin/dashboar...')
+#3 {main}
+"} 
+[2025-02-07 21:53:57] app.CRITICAL: Exception non gérée : Class "App\Core\Auth" not found {"exception":"[object] (Error(code: 0): Class \"App\\Core\\Auth\" not found at C:\\laragon\\www\\projet-mvc-php\\app\\controllers\\back\\DashboardController.php:14)
+[stacktrace]
+#0 [internal function]: App\\Controllers\\Back\\DashboardController->index()
+#1 C:\\laragon\\www\\projet-mvc-php\\app\\core\\Router.php(45): call_user_func_array(Array, Array)
+#2 C:\\laragon\\www\\projet-mvc-php\\public\\index.php(27): App\\Core\\Router->dispatch('GET', '/admin/dashboar...')
+#3 {main}
+"} 
+[2025-02-07 21:59:13] app.CRITICAL: Exception non gérée : Call to undefined method App\Models\User::hasPermission() {"exception":"[object] (Error(code: 0): Call to undefined method App\\Models\\User::hasPermission() at C:\\laragon\\www\\projet-mvc-php\\app\\core\\Auth.php:18)
+[stacktrace]
+#0 C:\\laragon\\www\\projet-mvc-php\\app\\controllers\\back\\DashboardController.php(14): App\\Core\\Auth::checkPermission('admin.dashboard...')
+#1 [internal function]: App\\Controllers\\Back\\DashboardController->index()
+#2 C:\\laragon\\www\\projet-mvc-php\\app\\core\\Router.php(45): call_user_func_array(Array, Array)
+#3 C:\\laragon\\www\\projet-mvc-php\\public\\index.php(27): App\\Core\\Router->dispatch('GET', '/admin/dashboar...')
+#4 {main}
+"} 
+[2025-02-07 22:00:22] app.CRITICAL: Exception non gérée : Call to undefined method App\Models\User::hasPermission() {"exception":"[object] (Error(code: 0): Call to undefined method App\\Models\\User::hasPermission() at C:\\laragon\\www\\projet-mvc-php\\app\\core\\Auth.php:18)
+[stacktrace]
+#0 C:\\laragon\\www\\projet-mvc-php\\app\\controllers\\back\\DashboardController.php(14): App\\Core\\Auth::checkPermission('admin.dashboard...')
+#1 [internal function]: App\\Controllers\\Back\\DashboardController->index()
+#2 C:\\laragon\\www\\projet-mvc-php\\app\\core\\Router.php(45): call_user_func_array(Array, Array)
+#3 C:\\laragon\\www\\projet-mvc-php\\public\\index.php(27): App\\Core\\Router->dispatch('GET', '/admin/dashboar...')
+#4 {main}
+"} 
+[2025-02-07 22:05:02] app.CRITICAL: Exception non gérée : Call to undefined method App\Models\User::hasPermission() {"exception":"[object] (Error(code: 0): Call to undefined method App\\Models\\User::hasPermission() at C:\\laragon\\www\\projet-mvc-php\\app\\core\\Auth.php:16)
+[stacktrace]
+#0 C:\\laragon\\www\\projet-mvc-php\\app\\controllers\\back\\DashboardController.php(14): App\\Core\\Auth::checkPermission('admin.dashboard...')
+#1 [internal function]: App\\Controllers\\Back\\DashboardController->index()
+#2 C:\\laragon\\www\\projet-mvc-php\\app\\core\\Router.php(45): call_user_func_array(Array, Array)
+#3 C:\\laragon\\www\\projet-mvc-php\\public\\index.php(27): App\\Core\\Router->dispatch('GET', '/admin/dashboar...')
+#4 {main}
+"} 
+[2025-02-07 22:15:32] app.INFO: Utilisateur déconnecté.  
+[2025-02-07 22:15:41] app.INFO: Utilisateur connecté : belal@belal.com {"user_id":3} 
+[2025-02-07 22:21:26] app.INFO: Utilisateur connecté : belal@belal.com {"user_id":3} 
+[2025-02-07 22:21:29] app.CRITICAL: Exception non gérée : Call to undefined method App\Models\User::hasPermission() {"exception":"[object] (Error(code: 0): Call to undefined method App\\Models\\User::hasPermission() at C:\\laragon\\www\\projet-mvc-php\\app\\core\\Auth.php:16)
+[stacktrace]
+#0 C:\\laragon\\www\\projet-mvc-php\\app\\controllers\\back\\DashboardController.php(13): App\\Core\\Auth::checkPermission('admin.dashboard...')
+#1 [internal function]: App\\Controllers\\Back\\DashboardController->index()
+#2 C:\\laragon\\www\\projet-mvc-php\\app\\core\\Router.php(38): call_user_func_array(Array, Array)
+#3 C:\\laragon\\www\\projet-mvc-php\\public\\index.php(27): App\\Core\\Router->dispatch('GET', '/admin/dashboar...')
+#4 {main}
+"} 
+[2025-02-07 22:21:34] app.CRITICAL: Exception non gérée : Call to undefined method App\Models\User::hasPermission() {"exception":"[object] (Error(code: 0): Call to undefined method App\\Models\\User::hasPermission() at C:\\laragon\\www\\projet-mvc-php\\app\\core\\Auth.php:16)
+[stacktrace]
+#0 C:\\laragon\\www\\projet-mvc-php\\app\\controllers\\back\\UserController.php(14): App\\Core\\Auth::checkPermission('user.view')
+#1 [internal function]: App\\Controllers\\Back\\UserController->index()
+#2 C:\\laragon\\www\\projet-mvc-php\\app\\core\\Router.php(38): call_user_func_array(Array, Array)
+#3 C:\\laragon\\www\\projet-mvc-php\\public\\index.php(27): App\\Core\\Router->dispatch('GET', '/admin/users')
+#4 {main}
+"} 
+[2025-02-07 22:30:13] app.INFO: Utilisateur déconnecté.  
+[2025-02-07 22:30:23] app.WARNING: Échec de la connexion pour l'utilisateur : quky@mailinator.com {"ip":"127.0.0.1","url":"/login"} 
+[2025-02-07 22:30:27] app.WARNING: CSRF token invalid lors de la connexion.  
+[2025-02-07 22:30:47] app.WARNING: Échec de la connexion pour l'utilisateur : jedo@mailinator.com {"ip":"127.0.0.1","url":"/login"} 
+[2025-02-07 22:30:51] app.WARNING: CSRF token invalid lors de la connexion.  
+[2025-02-07 22:30:58] app.WARNING: CSRF token invalid lors de la connexion.  
+[2025-02-07 22:31:08] app.WARNING: Échec de la connexion pour l'utilisateur : nyla@mailinator.com {"ip":"127.0.0.1","url":"/login"} 
+[2025-02-07 22:31:11] app.WARNING: CSRF token invalid lors de la connexion.  
+[2025-02-07 22:31:26] app.INFO: Nouvel utilisateur inscrit : latagylyv@mailinator.com {"username":"woseloqyki"} 
+[2025-02-07 22:31:55] app.WARNING: CSRF token invalid lors de l'inscription.  

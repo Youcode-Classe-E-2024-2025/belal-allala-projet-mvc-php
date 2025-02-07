@@ -21,10 +21,10 @@ class Database
         try {
             $this->pdo = new PDO($dsn, $user, $password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); // Récupérer les résultats sous forme de tableau associatif
+            $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
         } catch (PDOException $e) {
             echo "Erreur de connexion à la base de données : " . $e->getMessage();
-            die(); // Arrêter le script en cas d'erreur
+            die(); 
         }
     }
 

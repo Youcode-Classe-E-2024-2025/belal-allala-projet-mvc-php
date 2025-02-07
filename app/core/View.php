@@ -4,6 +4,7 @@ namespace App\Core;
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use Twig\Extension\DebugExtension;
 
 class View
 {
@@ -12,11 +13,13 @@ class View
     public static function getTwig(): Environment
     {
         if (self::$twig === null) {
-            $loader = new FilesystemLoader(__DIR__ . '/../views'); 
+            $loader = new FilesystemLoader(__DIR__ . '/../views');
             self::$twig = new Environment($loader, [
-                'cache' => false, 
-                'debug' => true, 
+                'cache' => false,
+                'debug' => true,
+                'autoescape' => 'html', 
             ]);
+            self::$twig->addExtension(new DebugExtension());
         }
         return self::$twig;
     }
